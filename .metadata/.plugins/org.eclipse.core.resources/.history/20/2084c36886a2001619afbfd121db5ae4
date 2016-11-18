@@ -1,0 +1,99 @@
+import java.awt.FlowLayout;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
+import org.opencv.core.MatOfRect;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.objdetect.CascadeClassifier;
+import org.opencv.videoio.VideoCapture;
+
+public class videotrack{
+	//static JFrame frame;
+	//static JLabel lbl;
+	//static ImageIcon icon;
+	
+	public static void main(String[] args){
+		
+	}
+	public boolean show(){
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+		
+		CascadeClassifier faceClassifier = new CascadeClassifier("C:/Users/Aryan/Desktop/udacity/player/haarcascade_frontalface_default.xml");
+		VideoCapture videoDevice = new VideoCapture();
+		videoDevice.open(0);
+		if(videoDevice.isOpened()){
+			while(true){
+				Mat frameCapture = new Mat();
+				videoDevice.read(frameCapture);
+				
+				MatOfRect faces = new MatOfRect();
+				faceClassifier.detectMultiScale(frameCapture, faces);
+				System.out.println(String.format("%s FACES", faces.toArray().length));
+				if(faces.toArray().length>0)
+					return true;
+				else
+					return false;
+			}
+		}
+		else{
+			System.out.println("Video not playing");
+			return false;
+		}
+	}
+	public void run(){
+		show();
+	}
+
+	/*private static void PushImage(Image img2) {
+		// TODO Auto-generated method stub
+		if(frame == null)
+			mkframe();
+		if(lbl != null)
+			frame.remove(lbl);
+		icon = new ImageIcon(img2);
+		lbl = new JLabel();
+		lbl.setIcon(icon);
+		frame.add(lbl);
+		frame.revalidate();
+	}
+
+	private static void mkframe() {
+		// TODO Auto-generated method stub
+		frame = new JFrame();
+		frame.setLayout(new FlowLayout());
+		frame.setSize(700, 600);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	private static BufferedImage ConvertMat2Image(Mat frameCapture) {
+		// TODO Auto-generated method stub
+		MatOfByte byteMat = new MatOfByte();
+		Imgcodecs.imencode(".jpg", frameCapture, byteMat);
+		byte[] byteArray = byteMat.toArray();
+		BufferedImage img = null;
+		try{
+			InputStream in = new ByteArrayInputStream(byteArray);
+			img = ImageIO.read(in);
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		
+		return img;
+	}*/
+}
