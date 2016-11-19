@@ -4,3 +4,5 @@ In this project the mediaplayer plays the video chosen. The mediaplayer is writt
 
 # Screenshots
 
+<img src="https://cloud.githubusercontent.com/assets/16362957/20455213/84560e7c-ae7c-11e6-8ede-6f5bd5a56427.JPG" height="300" width="400">
+<img src="https://cloud.githubusercontent.com/assets/16362957/20455214/8520d4e0-ae7c-11e6-8de9-1d6310c34f71.JPG" height="300" width="400">
